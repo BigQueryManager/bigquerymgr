@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Font Awesome CDN -->
+    <script src="https://use.fontawesome.com/457d33e4c6.js"></script>
     <title></title>
 </head>
 <body>
@@ -20,13 +22,23 @@
       </div>
     </nav>
     <section class="container-fluid">
-        <h1>Queries</h1>
+        <h1>Your queries</h1>
           <div class="panel-group" id="accordion">
+            <table>
+    <!--             <tr class="row">
+                    <td class="col-sm-6">Query title</td>
+                    <td class="col-sm-4">Query</td>
+                    <td class="col-sm-1">Status</td>
+                    <td class="col-sm-1">Last run</td>
+                </tr>
+            </table> -->
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
-                </h4>
+                <div class="panel-title row">
+                    <span class="panel-title col-sm-6"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">QueryTitle1</a></span>
+                    <span class="show-query col-sm-4"><a href="#" data-toggle="tooltip" title="QUERYGOESHERE">see query <i class="fa fa-info-circle" aria-hidden="true"></i></a></span>
+                    <span class="latest-date col-sm-2"><i class="fa fa-check" aria-hidden="true"></i> Today 12:00pm</span>
+                </div>
               </div>
               <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -36,9 +48,17 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
-                </h4>
+                <div class="panel-title row">
+                    <span class="panel-title col-sm-6">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">QueryTitle1</a>
+                    </span>
+                    <span class="show-query col-sm-4">
+                        <a href="#" data-toggle="tooltip" title="QUERYGOESHERE">see query <i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    </span>
+                    <span class="latest-date col-sm-2">
+                        <i class="fa fa-check" aria-hidden="true"></i> 7/14/17 1:00pm
+                    </span>
+                </div>
               </div>
               <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -48,9 +68,17 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
-                </h4>
+                <div class="panel-title row">
+                    <span class="panel-title col-sm-6">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">QueryTitle3</a>
+                    </span>
+                    <span class="show-query col-sm-4">
+                        <a href="#" data-toggle="tooltip" title="QUERYGOESHERE">see query <i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    </span>
+                    <span class="latest-date col-sm-2">
+                        <i class="fa fa-circle" aria-hidden="true"></i> Running
+                    </span>
+                </div>
               </div>
               <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -64,5 +92,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+    </script>
 </body>
 </html>
