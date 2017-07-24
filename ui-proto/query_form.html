@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Font Awesome CDN -->
+  <script src="https://use.fontawesome.com/457d33e4c6.js"></script>
+  <title></title>
+  <style>
+    section.main {
+      max-width: 80%;
+    }
+
+    .table>tbody>tr>td.query-instances {
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">BigQuery Manager</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Create a query</a></li>
+        <li><a href="#">Docs</a></li>
+      </ul>
+    </div>
+  </nav>
+  <section class="container-fluid main">
+    <h1>Your queries</h1>
+
+    <!-- SEPERATE -->
+    <form class="query-form" action="index.html" method="post">
+      <div class="form-group">
+        <h3>Query:</h3>
+        <label for="query">Enter Your Query:</label>
+        <input type="query" class="form-control" id="query">
+      </div>
+      <div class="form-group">
+        <h3>Schedule:</h3>
+        <label for="schedule">Frequency: </label>
+        <input type="radio" name="schedule" value="repeat" checked> Repeat
+        <input type="radio" name="schedule" value="run-once"> Run Once
+        </br>
+        <div class="repeats hidden">
+          <label for="repeat">Repeats: </label>
+          <select name="repeat">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+          </select>
+
+        </div>
+
+        <!-- Date Checkboxes -->
+        <div class="days hidden">
+          <label for="">Repeats On: </label>
+          <input type="checkbox"> S
+          <input type="checkbox"> M
+          <input type="checkbox"> T
+          <input type="checkbox"> W
+          <input type="checkbox"> T
+          <input type="checkbox"> F
+          <input type="checkbox"> S
+        </div>
+        <!-- Monthly Repeat -->
+        <div class="monthly-repeat hidden">
+          <label for="">Montly Repeat: </label>
+          <input type="radio" name="schedule" value="repeat" checked> Day of Month
+          <input type="radio" name="schedule" value="run-once"> Day of Week
+          </br>
+        </div>
+
+        <div class="starts-on hidden">
+          <label for="">Starts On: </label>
+          <input type="date" name="" value="">
+        </div>
+
+        <!-- Ends On Checkboxes -->
+        <div class="ends hidden">
+          <label for="">Ends: </label>
+          <div class="" display="inline-block">
+
+            <input type="radio" name="schedule" value="repeat" checked> Never
+            </br>
+            <input type="radio" name="schedule" value="run-once"> After
+            <input type="text" name="" value=""> times
+            </br>
+            <input type="radio" name="schedule" value="run-once"> On
+            <input type="date" name="" value="">
+          </div>
+        </div>
+
+        <div class="time hidden">
+
+          <input type="radio" name="schedule" value="run-once"> Time:
+          <input type="time" name="" value="">
+        </div>
+      </div>
+
+
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+
+
+
+
+
+
+
+
+    <!-- SEPERATE -->
+
+
+
+
+
+    </form>
+  </section>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../assets/scripts/bq.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+</body>
+
+</html>
