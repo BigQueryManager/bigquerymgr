@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Font Awesome CDN -->
+    <script src="https://use.fontawesome.com/457d33e4c6.js"></script>
+    <title></title>
+    <style>
+        section.main {
+            max-width: 80%;
+        }
+        .table>tbody>tr>td.query-instances {
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">BigQuery Manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="#">Create a query</a></li>
+          <li><a href="#">Docs</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="container-fluid main">
+        <h1>Your queries</h1>
+        <table class="table table-hover">
+            <thead>
+                <th>Query&nbsp;<a href="#" data-toggle="tooltip" title="QUERYGOESHERE"> <i class="fa fa-info-circle" aria-hidden="true"></i></a></th>
+                <th><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Schedule</th>
+                <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Last run</th>
+            </thead>
+            
+            <tbody>
+                <tr data-toggle="collapse" data-target="#query1-queries" class="clickable">
+                    <td>QueryTitle</td>
+                    <td>Weekly on Mondays at 3:00pm</td>
+                    <td>7/17/17 at 3:00pm</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="query-instances">
+                        <div id="query1-queries" class="collapse">
+                            <table class="table">
+                                <thead>
+                                    <th>Download</th>
+                                    <th>Visualization</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <a href="#">CSV</a>
+                                        <a href="#">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>7/17/17 at 3:00pm</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">CSV</a>
+                                        <a href="#">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>7/10/17 at 3:00pm</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">CSV</a>
+                                        <a href="#">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>7/3/17 at 3:00pm</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-toggle="collapse" data-target="#query2-queries" class="clickable">
+                    <td>QueryTitle2</td>
+                    <td>Daily at 5:00pm</td>
+                    <td>Yesterday at 5:00pm</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="query-instances">
+                        <div id="query2-queries" class="collapse">
+                            <table class="table">
+                                <thead>
+                                    <th>Download</th>
+                                    <th>Visualization</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <a href="#">CSV</a>
+                                        <a href="#">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>7/17/17 at 3:00pm</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">CSV</a>
+                                        <a href="#">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>7/10/17 at 3:00pm</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">CSV</a>
+                                        <a href="#">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>7/3/17 at 3:00pm</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+    </script>
+</body>
+</html>
