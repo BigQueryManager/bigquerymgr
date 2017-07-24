@@ -30,6 +30,7 @@ requests-oauthlib==0.8.0
 rsa==3.4.2
 schedule==0.4.3
 six==1.10.0
+social-auth-app-django==1.2.0
 social-auth-core==1.4.0
 tox==2.7.0
 urllib3==1.21.1
