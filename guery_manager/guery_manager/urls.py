@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from guery_manager.views import home
+from guery_manager.views import HomeView
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home, name='home'),
+    url(r'^$', HomeView.as_view(), name='home'),
     url('', include('social_django.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
+    url(r'^profile/', include('query_profile.urls')),
+    url(r'^query/', include('queries.urls')),
+    url(r'^handler/', include('query_handler.urls')),
 ]
