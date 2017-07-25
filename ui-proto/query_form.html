@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/vendor/bootstrap-datetimepicker.min.css" />
+  <link rel="stylesheet" href="../assets/css/modules.css">
+  <!-- Font Awesome CDN -->
+  <script src="https://use.fontawesome.com/457d33e4c6.js"></script>
+  <title></title>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">BigQuery Manager</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Create a query</a></li>
+        <li><a href="#">Docs</a></li>
+      </ul>
+    </div>
+  </nav>
+  <section class="container-fluid main">
+    <h1>Create a query</h1>
+
+    <!-- SCHEDULE FORM -->
+      <!-- Query -->
+      <form class="query-form" action="/action_page.php">
+        <h3>Query</h3>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="query">Enter your query:</label>
+          <div class="col-sm-10">
+            <input type="textarea" class="form-control" id="query" placeholder="Enter a query" name="query">
+          </div>
+        </div>
+
+        <!-- Scheduler -->
+        <h3>Schedule</h3>
+        <div class="form-group schedule">
+          <label class="control-label col-sm-2" for="schedule">Frequency:</label>
+          <div class="radio">          
+            <label class="radio-inline">
+              <input type="radio" name="schedule" id="inlineRadio1" value="repeat">Repeat
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="schedule" id="inlineRadio2" value="run-once">Run once
+            </label>
+          </div>
+        </div>
+
+        <!-- Starts On Date -->
+        <div class="form-group hidden starts-on dependent-once dependent-repeat">
+          <label class="control-label col-sm-2" for="datetimepicker4">Starts On:  </label>
+          <div class="row">
+              <div class='col-sm-3'>
+                  <input type='text' class="form-control" id='datetimepicker4' placeholder="mm/dd/yy" />
+              </div>
+          </div>
+        </div>
+
+        <!-- Repeat Option -->
+        <div class="form-group hidden repeats dependent-repeat">
+          <label class="control-label col-sm-2" for="repeat">Repeats: </label>
+          <div class="row">
+            <div class="col-sm-3">
+              <select name="repeat" class="form-control">
+                <option value="none"></option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date Checkboxes -->
+        <div class="form-group hidden days dependent-repeat">
+            <label class="control-label col-sm-2" for="">Repeats on: </label>
+            <div class="row">
+              <div class="col-sm-6">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="sunday">S
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="monday">M
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="tuesday">T
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="wednesday">W
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="thursday">Th
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="friday">F
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="saturday">S
+                </label>
+              </div>
+            </div>
+        </div>
+
+        <!-- Ends On Checkboxes -->
+        <div class="form-group hidden ends dependent-repeat">
+          <label class="control-label col-sm-2" for="">Ends: </label>
+          <div class="row">
+            <div class="col-sm-3">
+              <input type="radio" name="schedule" value="repeat" checked> Never
+              </br>
+              <input type="radio" name="schedule" value="run-once"> After
+              <input type="text" name="times" value=""> times
+              </br>
+              <input type="radio" name="schedule" value="run-once"> On
+                  <div class="row">
+                      <div class='col-sm-3'>
+                          <input type='text' id='datetimepicker5' placeholder="mm/dd/yy" />
+                      </div>
+                  </div>
+              </div>
+            </div>    
+        </div>
+
+        <div class="form-group">        
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+
+  </section>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="../assets/scripts/vendor/bootstrap-datetimepicker.js"></script>
+  <!-- Moment.js library -->
+  <script scr="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../assets/scripts/bqForm.js"></script>
+</body>
+
+</html>
