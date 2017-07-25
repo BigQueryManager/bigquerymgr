@@ -1,6 +1,9 @@
 {% extends 'guery_manager/base.html' %}
+{% load staticfiles %}
 
 {% block main %}
+{% if user.is_authenticated %}
+
     <section class="container-fluid main">
         <h1>Your queries</h1>
         <table class="table table-hover">
@@ -131,4 +134,9 @@
         </table>
     </section>
     <script src="{% static '/scripts/bqMgr.js' %}"></script>
+
+{% else %}
+<p><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+{% endif %}
+
 {% endblock %}
