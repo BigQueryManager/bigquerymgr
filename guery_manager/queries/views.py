@@ -13,6 +13,25 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
     model = Queries
     login_url = reverse_lazy('home')
 
+    def post(self, request, *args, **kwargs):
+        """Form post method."""
+        self.object = self.get_object()
+        user = request.user
+        data = request.POST
+        import pdb; pdb.set_trace()
+        # if data['username'] and data['email']:
+        #     user.username = data['username']
+        #     user.email = data['email']
+        #     user.first_name = data['first_name']
+        #     user.last_name = data['last_name']
+        #     user.imagerprofile.age = data['age']
+        #     user.imagerprofile.job = data['job']
+        #     user.imagerprofile.website = data['website']
+        #     user.save()
+        #     user.imagerprofile.save()
+        #     return HttpResponseRedirect(self.get_success_url())
+        # return self.render_to_response(self.get_context_data(**kwargs))
+
 
 class UpdateQuerySchedule(LoginRequiredMixin, UpdateView):
     template_name = 'queries/updatequery.html'
