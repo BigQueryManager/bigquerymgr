@@ -14,7 +14,45 @@
             </thead>
             
             <tbody>
-                <tr data-toggle="collapse" data-target="#query1-queries" class="clickable">
+            {% for query in queries %}
+                <tr data-toggle="collapse" data-target="#query{{ query.id }}-queries" class="clickable">
+                    <td>{{ query.name }}</td>
+                    <td>{{ query.schedule }}</td>
+                    <td>{{ query.last_run }}</td>
+                </tr>
+                {% if query.instances %}
+                <tr>
+                    <td colspan="3" class="query-instances">
+                        <div id="#query{{ query.id }}-queries" class="collapse">
+                            <table class="table">
+                                <thead>
+                                    <th>Download</th>
+                                    <th>Visualization</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </thead>
+                                {% for query_instance in query.instances %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ query_instance.root_url }}">CSV</a>
+                                        <a href="{{ query_instance.root_url }}">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ query_instance.visual_url }}">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>"{{ query_instance.status }}"</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            {% endfor %}
+<!--                 <tr data-toggle="collapse" data-target="#query1-queries" class="clickable">
                     <td>QueryTitle</td>
                     <td>Weekly on Mondays at 3:00pm</td>
                     <td>7/17/17 at 3:00pm</td>
@@ -130,7 +168,7 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
+            </tbody> -->
         </table>
     </section>
     <script src="{% static '/scripts/bqMgr.js' %}"></script>
