@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from guery_manager.views import HomeView
+from django.conf import settings
+from django.conf.urls.static import static
 admin.autodiscover()
 
 urlpatterns = [
@@ -25,3 +27,11 @@ urlpatterns = [
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^query/', include('queries.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
+    )
