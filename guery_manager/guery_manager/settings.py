@@ -125,6 +125,10 @@ AUTH_PASSWORD_VALIDATORS = [
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_SECRET')
 
+# Login redirects
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 

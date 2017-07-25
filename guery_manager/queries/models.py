@@ -15,8 +15,8 @@ class Queries(models.Model):
 
 
 class QueryInstance(models.Model):
-    root_url = models.UrlField(max_length=255)
-    visual_url = models.UrlField(max_length=255)
+    root_url = models.URLField(max_length=255)
+    visual_url = models.URLField(max_length=255)
     queries = models.ForeignKey(Queries, on_delete=models.CASCADE, related_name='instances')
     status = models.CharField(default='Pending', max_length=16)
 
