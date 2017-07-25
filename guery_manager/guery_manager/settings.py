@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
-    'guery_manager'
+    'guery_manager',
+    'queries'
 ]
 
 LOGIN_REDIRECT_URL = '/'
