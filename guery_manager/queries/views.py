@@ -12,6 +12,9 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
     template_name = 'queries/builder.html'
     model = Queries
     login_url = reverse_lazy('home')
+    fields = [
+        "name", "query_text", "schedule"
+    ]
 
     def post(self, request, *args, **kwargs):
         """Form post method."""

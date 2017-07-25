@@ -1,5 +1,5 @@
-{% load staticfiles %}
 {% extends 'guery_manager/base.html' %}
+{% load staticfiles %}
 
 {% block main %}
   <section class="container-fluid main">
@@ -7,7 +7,7 @@
 
     <!-- SCHEDULE FORM -->
       <!-- Query -->
-      <form class="query-form" action="/action_page.php">
+      <form class="query-form" method="POST">
         <h3>Query</h3>
         <div class="form-group">
           <label class="control-label col-sm-2" for="query">Enter your query:</label>
@@ -20,12 +20,12 @@
         <h3>Schedule</h3>
         <div class="form-group schedule">
           <label class="control-label col-sm-2" for="schedule">Frequency:</label>
-          <div class="radio" name="schedule">          
+          <div class="radio">          
             <label class="radio-inline">
-              <input type="radio" name="schedule-but1" id="inlineRadio1" value="repeat">Repeat
+              <input type="radio" name="schedule" id="inlineRadio1" value="repeat">Repeat
             </label>
             <label class="radio-inline">
-              <input type="radio" name="schedule-but2" id="inlineRadio2" value="run-once">Run once
+              <input type="radio" name="schedule" id="inlineRadio2" value="run-once">Run once
             </label>
           </div>
         </div>
@@ -92,6 +92,13 @@
       </form>
 
   </section>
-  <script src="{% static '/scripts/vendor/bootstrap-datetimepicker.js' %}"></script>
-  <script src="{% static '/scripts/bqForm.js' %}"></script>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static '/scripts/vendor/bootstrap-datetimepicker.js' %}"></script>
+    <!-- Moment.js library -->
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static '/scripts/bqForm.js' %}"></script>
 {% endblock %}
