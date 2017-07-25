@@ -1,10 +1,10 @@
 $( document ).ready(function() {
 
+    var $form = $('#query-form');
     var $schedule =  $('.schedule input:radio[name=schedule]');
     var $repeats = $('.repeats');
     var $repeatsSelect = $('.repeats select');
     var $run =  $('.run-fields');
-    var $monthly = $('.monthly-repeat');
     var $days = $('.days');
     var $time = $('.time');
     var $all1 = $('.dependent-form1')
