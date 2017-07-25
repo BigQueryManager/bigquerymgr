@@ -11,13 +11,16 @@ from django.shortcuts import redirect
 class CreateNewQuery(LoginRequiredMixin, CreateView):
     template_name = 'queries/builder.html'
     model = Queries
+    login_url = reverse_lazy('home')
 
 
 class UpdateQuerySchedule(LoginRequiredMixin, UpdateView):
     template_name = 'queries/updatequery.html'
     model = Queries
+    login_url = reverse_lazy('home')
 
 
 class ListQueries(LoginRequiredMixin, ListView):
     template_name = 'queries/manager.html'
     model = Queries
+    login_url = reverse_lazy('home')
