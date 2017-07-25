@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/path/to/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  <link rel="stylesheet" href="../assets/css/vendor/bootstrap-datetimepicker.min.css" />
   <!-- Font Awesome CDN -->
   <script src="https://use.fontawesome.com/457d33e4c6.js"></script>
   <title></title>
@@ -34,82 +34,93 @@
     </div>
   </nav>
   <section class="container-fluid main">
-    <h1>Your queries</h1>
+    <h1>Create a query</h1>
 
     <!-- SCHEDULE FORM -->
     <form class="query-form" action="index.html" method="post">
       <div class="form-group">
-        <h3>Query:</h3>
+        <h3>Query</h3>
         <label for="query">Enter your query:</label>
-        <input type="query" class="form-control" id="query">
+        <input type="query" class="form-control col-sm-3" id="query">
       </div>
+      <hr>
 
       <!-- Scheduler -->
       <div class="form-group">
-        <h3>Schedule:</h3>
+        <h3>Schedule</h3>
         <div class="schedule">        
-          <label for="schedule">Frequency: </label>
-          <input type="radio" name="schedule" value="repeat" checked> Repeat
-          <input type="radio" name="schedule" value="run-once"> Run Once
-          </br>
+          <label for="schedule">Frequency:  </label>
+          <label class="radio-inline">
+            <input type="radio" name="schedule" id="inlineRadio1" value="repeat">Repeat
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="schedule" id="inlineRadio2" value="run-once">Run once
+          </label>
         </div>
 
+        <!-- Starts On Date -->
+        <div class="starts-on hidden dependent-once dependent-repeat">
+          <label for="">Starts On:  </label>
+              <div class="row">
+                  <div class='col-sm-3'>
+                      <input type='text' class="form-control" id='datetimepicker4' />
+                  </div>
+              </div>
+          </div>
+
         <!-- Repeat Option -->
-        <div class="repeats hidden dependent-form1">
+        <div class="repeats hidden dependent-repeat">
           <label for="repeat">Repeats: </label>
-          <select name="repeat">
+          <select name="repeat" class="form-control">
             <option value="none"></option>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
           </select>
         </div>
 
-        <!-- Run Once Radio -->
-        <div class="run-fields hidden dependent-form1">
-          <label for="run">Run: </label>
-          <input type="radio" name="run" value="now" checked> Now
-          <input type="radio" name="run" value="schedule"> Schedule
-          </br>
-        </div>
-
         <!-- Date Checkboxes -->
-        <div class="days hidden dependent-form1 dependent-form2">
-          <label for="">Repeats On: </label>
-          <input type="checkbox"> S
-          <input type="checkbox"> M
-          <input type="checkbox"> T
-          <input type="checkbox"> W
-          <input type="checkbox"> T
-          <input type="checkbox"> F
-          <input type="checkbox"> S
-        </div>
-
-        <!-- Starts On Date -->
-        <div class="starts-on hidden dependent-form1 dependent-form2">
-          <label for="">Starts On: </label>
-          <input type="date" name="" value="">
+        <div class="days hidden dependent-repeat">
+          <label for="">Repeats on: </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="sunday">S
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" value="monday">M
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" value="tuesday">T
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="wednesday">W
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" value="thursday">Th
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" value="friday">F
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="saturday">S
+          </label>
         </div>
 
         <!-- Ends On Checkboxes -->
-        <div class="ends hidden dependent-form1 dependent-form2">
+        <div class="ends hidden dependent-repeat">
           <label for="">Ends: </label>
           <div class="" display="inline-block">
-
             <input type="radio" name="schedule" value="repeat" checked> Never
             </br>
             <input type="radio" name="schedule" value="run-once"> After
             <input type="text" name="" value=""> times
             </br>
             <input type="radio" name="schedule" value="run-once"> On
-            <input type="date" name="" value="">
-          </div>
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <input type='text' class="form-control" id='datetimepicker5' />
+                    </div>
+                </div>
+            </div>       
         </div>
-
-        <!-- Time -->
-        <div class="time hidden dependent-form1 dependent-form2">
-          Time: <input type="time" name="" value="">
-        </div>
-
       </div>
 
       <button type="submit" class="btn btn-default">Submit</button>
@@ -117,6 +128,10 @@
   </section>
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="../assets/scripts/vendor/bootstrap-datetimepicker.js"></script>
+  <!-- Moment.js library -->
+  <script scr="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="../assets/scripts/bq.js"></script>

@@ -1,31 +1,33 @@
 $( document ).ready(function() {
 
+    $('#datetimepicker4').datetimepicker();
+    $('#datetimepicker5').datetimepicker();
+
     var $form = $('#query-form');
     var $schedule =  $('.schedule input:radio[name=schedule]');
     var $repeats = $('.repeats');
     var $repeatsSelect = $('.repeats select');
-    var $run =  $('.run-fields');
+    // var $run =  $('.run-fields');
     var $days = $('.days');
-    var $time = $('.time');
-    var $all1 = $('.dependent-form1')
-    var $all2 = $('.dependent-form2')
+    var $allRepeat = $('.dependent-repeat')
+    var $allOnce = $('.dependent-once')
 
     $schedule.change(
         function() {
-            $all1.addClass('hidden')
+            $allRepeat.addClass('hidden')
+            $allOnce.addClass('hidden')
             var value = this.value;
             if (value === 'repeat'){
-                $repeats.removeClass('hidden');
+                $allRepeat.removeClass('hidden');
             }
             if (value === 'run-once'){
-                $run.removeClass('hidden');
+                $allOnce.removeClass('hidden');
             }
         }
     );
 
     $repeatsSelect.change(
         function() {
-            $all2.addClass('hidden')
             var value = this.value;
             if (value === 'daily'){
                 $time.removeClass('hidden');
