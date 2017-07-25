@@ -1,13 +1,12 @@
 $( document ).ready(function() {
 
     $('#datetimepicker4').datetimepicker();
-    $('#datetimepicker5').datetimepicker();
+    $('#datetimepicker4').datetimepicker();
 
     var $form = $('#query-form');
     var $schedule =  $('.schedule input:radio[name=schedule]');
     var $repeats = $('.repeats');
     var $repeatsSelect = $('.repeats select');
-    // var $run =  $('.run-fields');
     var $days = $('.days');
     var $allRepeat = $('.dependent-repeat')
     var $allOnce = $('.dependent-once')
