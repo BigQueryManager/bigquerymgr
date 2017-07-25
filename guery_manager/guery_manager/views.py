@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from django.views import View
+from django.views.generic import ListView
+from queries.models import Queries
 
 
-class HomeView(View):
+class HomeView(ListView):
     """Home view callable, for the home page."""
-    def get(self, request):
-        context = {'user': request.user}
-        return render(request, 'guery_manager/home.html', context=context)
+    template_name = 'queries/manager.html'
+    model = Queries
+    context_object_name = 'queries'
+
+    def get_queryset(self):
+        return self.request.user.queries.all()
