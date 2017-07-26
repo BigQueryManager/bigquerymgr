@@ -20,10 +20,10 @@
                     <td>{{ query.schedule }}</td>
                     <td>{{ query.last_run }}</td>
                 </tr>
-                {% if query.instances %}
+                {% if query.instances.all %}
                 <tr>
                     <td colspan="3" class="query-instances">
-                        <div id="#query{{ query.id }}-queries" class="collapse">
+                        <div id="query{{ query.id }}-queries" class="collapse">
                             <table class="table">
                                 <thead>
                                     <th>Download</th>
@@ -31,7 +31,7 @@
                                     <th>Status</th>
                                     <th>Date</th>
                                 </thead>
-                                {% for query_instance in query.instances %}
+                                {% for query_instance in query.instances.all %}
                                 <tr>
                                     <td>
                                         <a href="{{ query_instance.root_url }}">CSV</a>
@@ -49,126 +49,10 @@
                         </div>
                     </td>
                 </tr>
-                {% endif %}
                 {% endfor %}
+                {% endif %}
             {% endfor %}
-<!--                 <tr data-toggle="collapse" data-target="#query1-queries" class="clickable">
-                    <td>QueryTitle</td>
-                    <td>Weekly on Mondays at 3:00pm</td>
-                    <td>7/17/17 at 3:00pm</td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="query-instances">
-                        <div id="query1-queries" class="collapse">
-                            <table class="table">
-                                <thead>
-                                    <th>Download</th>
-                                    <th>Visualization</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </thead>
-                                <tr>
-                                    <td>
-                                        <a href="#">CSV</a>
-                                        <a href="#">JSON</a>
-                                    </td>
-                                    <td>
-                                        <a href="#">Visualization</a>
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </td>
-                                    <td>7/17/17 at 3:00pm</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">CSV</a>
-                                        <a href="#">JSON</a>
-                                    </td>
-                                    <td>
-                                        <a href="#">Visualization</a>
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </td>
-                                    <td>7/10/17 at 3:00pm</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">CSV</a>
-                                        <a href="#">JSON</a>
-                                    </td>
-                                    <td>
-                                        <a href="#">Visualization</a>
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </td>
-                                    <td>7/3/17 at 3:00pm</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-                <tr data-toggle="collapse" data-target="#query2-queries" class="clickable">
-                    <td>QueryTitle2</td>
-                    <td>Daily at 5:00pm</td>
-                    <td>Yesterday at 5:00pm</td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="query-instances">
-                        <div id="query2-queries" class="collapse">
-                            <table class="table">
-                                <thead>
-                                    <th>Download</th>
-                                    <th>Visualization</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </thead>
-                                <tr>
-                                    <td>
-                                        <a href="#">CSV</a>
-                                        <a href="#">JSON</a>
-                                    </td>
-                                    <td>
-                                        <a href="#">Visualization</a>
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </td>
-                                    <td>7/17/17 at 3:00pm</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">CSV</a>
-                                        <a href="#">JSON</a>
-                                    </td>
-                                    <td>
-                                        <a href="#">Visualization</a>
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </td>
-                                    <td>7/10/17 at 3:00pm</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">CSV</a>
-                                        <a href="#">JSON</a>
-                                    </td>
-                                    <td>
-                                        <a href="#">Visualization</a>
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </td>
-                                    <td>7/3/17 at 3:00pm</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </tbody> -->
+            </tbody>
         </table>
     </section>
     <script src="{% static '/scripts/bqMgr.js' %}"></script>
