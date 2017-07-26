@@ -1,30 +1,7 @@
-<!DOCTYPE html>
-<html>
+{% load staticfiles %}
+{% extends 'guery_manager/base.html' %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/css/vendor/bootstrap-datetimepicker.min.css" />
-  <link rel="stylesheet" href="../assets/css/modules.css">
-  <!-- Font Awesome CDN -->
-  <script src="https://use.fontawesome.com/457d33e4c6.js"></script>
-  <title></title>
-</head>
-
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">BigQuery Manager</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="#">Create a query</a></li>
-        <li><a href="#">Docs</a></li>
-      </ul>
-    </div>
-  </nav>
+{% block main %}
   <section class="container-fluid main">
     <h1>Create a query</h1>
 
@@ -135,15 +112,6 @@
       </form>
 
   </section>
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- jQuery library -->
-  <script src="../assets/scripts/vendor/bootstrap-datetimepicker.js"></script>
-  <!-- Moment.js library -->
-  <script scr="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="../assets/scripts/bqForm.js"></script>
-</body>
-
-</html>
+  <script src="{% static '/scripts/vendor/bootstrap-datetimepicker.js' %}"></script>
+  <script src="{% static '/scripts/bqForm.js' %}"></script>
+{% endblock %}

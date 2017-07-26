@@ -1,9 +1,20 @@
-from django.shortcuts import render
-from django.views import View
+"""Query manager views."""
+
+from django.views.generic import ListView
+from queries.models import Queries
 
 
-class HomeView(View):
+class HomeView(ListView):
     """Home view callable, for the home page."""
-    def get(self, request):
-        context = {'user': request.user}
-        return render(request, 'guery_manager/home.html', context=context)
+
+    template_name = 'guery_manager/manager.html'
+    model = Queries
+
+    def get_context_data(self):
+        """Get queries from user."""
+        context = super(HomeView, self).get_context_data()
+        if self.request.user.is_anonymous():
+            return
+        else:
+            context['queries'] = self.request.user.queries.all()
+            return context

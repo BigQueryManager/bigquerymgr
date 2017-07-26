@@ -1,0 +1,64 @@
+{% extends 'guery_manager/base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+{% if user.is_authenticated %}
+
+    <section class="container-fluid main">
+        <h1>Your queries</h1>
+        <table class="table table-hover">
+            <thead>
+                <th>Query&nbsp;<a href="#" data-toggle="tooltip" title="QUERYGOESHERE"> <i class="fa fa-info-circle" aria-hidden="true"></i></a></th>
+                <th><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Schedule</th>
+                <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Last run</th>
+            </thead>
+            
+            <tbody>
+            {% for query in queries %}
+                <tr data-toggle="collapse" data-target="#query{{ query.id }}-queries" class="clickable">
+                    <td>{{ query.name }}</td>
+                    <td>{{ query.schedule }}</td>
+                    <td>{{ query.last_run }}</td>
+                </tr>
+                {% if query.instances.all %}
+                <tr>
+                    <td colspan="3" class="query-instances">
+                        <div id="query{{ query.id }}-queries" class="collapse">
+                            <table class="table">
+                                <thead>
+                                    <th>Download</th>
+                                    <th>Visualization</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </thead>
+                                {% for query_instance in query.instances.all %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ query_instance.root_url }}">CSV</a>
+                                        <a href="{{ query_instance.root_url }}">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ query_instance.visual_url }}">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>"{{ query_instance.status }}"</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <script src="{% static '/scripts/bqMgr.js' %}"></script>
+
+{% else %}
+<p><a id="login" href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+{% endif %}
+
+{% endblock %}
