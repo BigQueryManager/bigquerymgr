@@ -16,12 +16,13 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         "name", "query_text", "schedule"
     ]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         """Form post method."""
-        self.object = self.get_object()
+        # self.object = self.get_object()
         user = request.user
         data = request.POST
-        import pdb; pdb.set_trace()
+        form_info = request.body.decode('utf-8')
+        # b'csrfmiddlewaretoken=xdThXZPYamoDKkh9YO9eZBVokfsGXhe30ctVB7s2gdI8OkrsYJThfd5lS3hXKVYo&query=test&schedule=repeat&start-on=2017-07-11+04%3A20&tuesday=true&thursday=true'
         # if data['username'] and data['email']:
         #     user.username = data['username']
         #     user.email = data['email']

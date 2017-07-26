@@ -1,4 +1,5 @@
 {% extends 'guery_manager/base.html' %}
+
 {% load staticfiles %}
 
 {% block main %}
@@ -8,7 +9,15 @@
     <!-- SCHEDULE FORM -->
       <!-- Query -->
       <form class="query-form" method="POST">
+      {% csrf_token %}
         <h3>Query</h3>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Query name:</label>
+          <div class="col-sm-10">
+            <input type="textarea" class="form-control" id="name" placeholder="Query name" name="name">
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="control-label col-sm-2" for="query">Enter your query:</label>
           <div class="col-sm-10">
@@ -40,45 +49,31 @@
           </div>
         </div>
 
-        <!-- Repeat Option -->
-        <div class="form-group hidden repeats dependent-repeat">
-          <label class="control-label col-sm-2" for="repeat">Repeats: </label>
-          <div class="row">
-            <div class="col-sm-3">
-              <select name="repeat" class="form-control">
-                <option value="none"></option>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
         <!-- Date Checkboxes -->
         <div class="form-group hidden days dependent-repeat">
             <label class="control-label col-sm-2" for="">Repeats on: </label>
             <div class="row">
               <div class="col-sm-6">
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="sunday" name="sunday">S
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="sunday">S
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="monday" name="monday">M
+                  <input type="checkbox" id="inlineCheckbox2" value="true" name="monday">M
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="tuesday" name="tuesday">T
+                  <input type="checkbox" id="inlineCheckbox3" value="true" name="tuesday">T
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="wednesday" name="wednesday">W
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="wednesday">W
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="thursday" name="thursday">Th
+                  <input type="checkbox" id="inlineCheckbox2" value="true" name="thursday">Th
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="friday" name="friday">F
+                  <input type="checkbox" id="inlineCheckbox3" value="true" name="friday">F
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="saturday" name="saturday">S
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="saturday">S
                 </label>
               </div>
             </div>
