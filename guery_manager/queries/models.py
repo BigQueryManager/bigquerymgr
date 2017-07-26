@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Queries(models.Model):
     name = models.CharField(max_length=100)
+    dataset = models.CharField(max_length=255, null=True)
     query_text = models.CharField(max_length=255)
     schedule = models.CharField(max_length=255)
     last_run = models.DateTimeField(null=True, blank=True)
