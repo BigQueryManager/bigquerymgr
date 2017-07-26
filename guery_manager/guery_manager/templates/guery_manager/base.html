@@ -26,6 +26,9 @@
         <ul class="nav navbar-nav">
           <li><a href="{% url 'queries:build' %}">Create a Query</a></li>
           <li><a href="#">Docs</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>

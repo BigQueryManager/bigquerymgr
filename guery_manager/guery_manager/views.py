@@ -1,9 +1,12 @@
+"""Query manager views."""
+
 from django.views.generic import ListView
 from queries.models import Queries
 
 
 class HomeView(ListView):
     """Home view callable, for the home page."""
+
     template_name = 'guery_manager/manager.html'
     model = Queries
 
@@ -14,5 +17,4 @@ class HomeView(ListView):
             return
         else:
             context['queries'] = self.request.user.queries.all()
-            # import pdb; pdb.set_trace()
             return context
