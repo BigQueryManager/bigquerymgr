@@ -34,6 +34,12 @@ class Views(TestCase):
 
     def setUp(self):
         """Set up for tests."""
+        user = User(
+            username='morgan',
+            email='morgan@morgan.com'
+        )
+        user.save()
+        self.user = user
         self.client = Client()
 
     def test_login_button_home_route_unauthenticated_user(self):
@@ -49,3 +55,35 @@ class Views(TestCase):
         html = BeautifulSoup(response.content, 'html.parser')
         table = html.find('table')
         self.assertFalse(table)
+
+    def test_table_on_home_view_authenticated_user(self):
+        """Test table appears on home page for authenticated user."""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse_lazy('home'))
+        html = BeautifulSoup(response.content, 'html.parser')
+        table = html.find('table')
+        self.assertTrue(table)
+
+
+class Models(TestCase):
+    """Test Queries and QueryInstance models."""
+
+    def setUp(self):
+        """Set up for tests."""
+        user = User(
+            username='morgan',
+            email='morgan@morgan.com'
+        )
+        user.save()
+        self.user = user
+        self.client = Client()
+
+        queries = (QueryFactory.build() for i in range(10))
+        for query in queries:
+            query.run_by = self.user
+            query.save()
+
+    def test_queries_count(self):
+        """Check the correct number of queries in database."""
+        queries = Queries.objects.count()
+        self.assertEqual(queries, 10)
