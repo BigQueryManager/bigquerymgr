@@ -58,7 +58,7 @@
     <script src="{% static '/scripts/bqMgr.js' %}"></script>
 
 {% else %}
-<p><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+<p><a id="login" href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
 {% endif %}
 
 {% endblock %}
