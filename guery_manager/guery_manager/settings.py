@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'social_django',
     'guery_manager',
     'queries',
-    'django_extensions'
+    'django_extensions',
+    'python-crontab',
+    'apiclient',
+    'oauth2client'
 ]
 
 LOGIN_REDIRECT_URL = '/'
