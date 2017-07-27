@@ -12,7 +12,7 @@ import json
 
 the_user = User.objects.first()
 
-try_this = {
+build_credentials = {
     "access_token": the_user.social_auth.values()[0]['extra_data']['access_token'],
     "client_id": os.environ.get('GOOGLE_KEY'),
     "client_secret": os.environ.get('GOOGLE_SECRET'),
@@ -37,11 +37,17 @@ try_this = {
     "_module": "oauth2client.client"
 }
 
-whatevs = json.dumps(try_this)
+credential_inputs = json.dumps(build_credentials)
 
-def run():
+
+def run(*args):
+    """Execute command."""
+    # project, query, user name
+    project = *args[0]
+    query = *args[1]
+    user = User.objects.get(username=*args[2])
     import pdb; pdb.set_trace()
-    credentials = client.OAuth2Credentials.from_json(whatevs)
+    credentials = client.OAuth2Credentials.from_json(credential_inputs)
     http_auth = credentials.authorize(httplib2.Http())
     bigq = discovery.build('bigquery', 'v2', http=http_auth)
 
