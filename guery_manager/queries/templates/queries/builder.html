@@ -47,7 +47,7 @@
         </div>
 
         <!-- Starts On Date -->
-        <div class="form-group hidden starts-on dependent-once dependent-repeat">
+        <div class="form-group hidden starts-on dependent-once">
           <label class="control-label col-sm-2" for="datetimepicker4">Starts On:  </label>
           <div class="row">
               <div class='col-sm-3'>
@@ -56,9 +56,18 @@
           </div>
         </div>
 
+        <div class="form-group hidden start-time dependent-repeat">
+          <label class="control-label col-sm-2" for="datetimepicker3">Run at:  </label>
+          <div class="row">
+              <div class='col-sm-3'>
+                  <input type='text' class="form-control" id='datetimepicker3' placeholder="hh:mm"  name="start-on"/>
+              </div>
+          </div>
+        </div>
+
         <!-- Date Checkboxes -->
         <div class="form-group hidden days dependent-repeat">
-            <label class="control-label col-sm-2" for="">Repeats on: </label>
+            <label class="control-label col-sm-2" for="">Repeats every: </label>
             <div class="row">
               <div class="col-sm-6">
                 <label class="checkbox-inline">

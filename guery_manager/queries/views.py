@@ -22,6 +22,8 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         """Form post method."""
         user = request.user
 
+        import pdb;pdb.set_trace()
+
         form_info = request.body.decode('utf-8')
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
