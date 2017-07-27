@@ -47,9 +47,10 @@ def run(*args):
     """Execute command."""
     # project, query, user name
     import pdb; pdb.set_trace()
-    project = *args[0]
-    query = *args[1]
-    user = User.objects.get(username=*args[2])
+    print(args)
+    # project = *args[0]
+    # query = *args[1]
+    user = User.objects.get(username=args[2])
     social = user.social_auth.get(provider='google-oauth2')
     access_token = social.get_access_token(load_strategy())
     credentials = client.OAuth2Credentials.from_json(credential_inputs)
