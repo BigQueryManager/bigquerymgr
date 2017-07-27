@@ -1,5 +1,6 @@
-{% load staticfiles %}
 {% extends 'guery_manager/base.html' %}
+
+{% load staticfiles %}
 
 {% block main %}
   <section class="container-fluid main">
@@ -7,8 +8,23 @@
 
     <!-- SCHEDULE FORM -->
       <!-- Query -->
-      <form class="query-form" action="/action_page.php">
+      <form class="query-form" method="POST">
+      {% csrf_token %}
         <h3>Query</h3>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Query name:</label>
+          <div class="col-sm-10">
+            <input type="textarea" class="form-control" id="name" placeholder="Query name" name="name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="dataset">Enter your dataset:</label>
+          <div class="col-sm-10">
+            <input type="textarea" class="form-control" id="dataset" placeholder="Dataset you have permissions to" name="dataset">
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="control-label col-sm-2" for="query">Enter your query:</label>
           <div class="col-sm-10">
@@ -35,22 +51,8 @@
           <label class="control-label col-sm-2" for="datetimepicker4">Starts On:  </label>
           <div class="row">
               <div class='col-sm-3'>
-                  <input type='text' class="form-control" id='datetimepicker4' placeholder="mm/dd/yy" />
+                  <input type='text' class="form-control" id='datetimepicker4' placeholder="mm/dd/yy"  name="start-on"/>
               </div>
-          </div>
-        </div>
-
-        <!-- Repeat Option -->
-        <div class="form-group hidden repeats dependent-repeat">
-          <label class="control-label col-sm-2" for="repeat">Repeats: </label>
-          <div class="row">
-            <div class="col-sm-3">
-              <select name="repeat" class="form-control">
-                <option value="none"></option>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-              </select>
-            </div>
           </div>
         </div>
 
@@ -60,48 +62,28 @@
             <div class="row">
               <div class="col-sm-6">
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="sunday">S
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="sunday">S
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="monday">M
+                  <input type="checkbox" id="inlineCheckbox2" value="true" name="monday">M
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="tuesday">T
+                  <input type="checkbox" id="inlineCheckbox3" value="true" name="tuesday">T
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="wednesday">W
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="wednesday">W
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="thursday">Th
+                  <input type="checkbox" id="inlineCheckbox2" value="true" name="thursday">Th
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="friday">F
+                  <input type="checkbox" id="inlineCheckbox3" value="true" name="friday">F
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="saturday">S
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="saturday">S
                 </label>
               </div>
             </div>
-        </div>
-
-        <!-- Ends On Checkboxes -->
-        <div class="form-group hidden ends dependent-repeat">
-          <label class="control-label col-sm-2" for="">Ends: </label>
-          <div class="row">
-            <div class="col-sm-3">
-              <input type="radio" name="schedule" value="repeat" checked> Never
-              </br>
-              <input type="radio" name="schedule" value="run-once"> After
-              <input type="text" name="times" value=""> times
-              </br>
-              <input type="radio" name="schedule" value="run-once"> On
-                  <div class="row">
-                      <div class='col-sm-3'>
-                          <input type='text' id='datetimepicker5' placeholder="mm/dd/yy" />
-                      </div>
-                  </div>
-              </div>
-            </div>    
         </div>
 
         <div class="form-group">        
@@ -112,6 +94,13 @@
       </form>
 
   </section>
-  <script src="{% static '/scripts/vendor/bootstrap-datetimepicker.js' %}"></script>
-  <script src="{% static '/scripts/bqForm.js' %}"></script>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static '/scripts/vendor/bootstrap-datetimepicker.js' %}"></script>
+    <!-- Moment.js library -->
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static '/scripts/bqForm.js' %}"></script>
 {% endblock %}

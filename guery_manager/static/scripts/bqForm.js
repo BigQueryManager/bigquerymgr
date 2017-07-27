@@ -1,8 +1,7 @@
 $( document ).ready(function() {
 
     $('#datetimepicker4').datetimepicker();
-    $('#datetimepicker4').datetimepicker();
-
+    
     var $form = $('#query-form');
     var $schedule =  $('.schedule input:radio[name=schedule]');
     var $repeats = $('.repeats');
@@ -28,17 +27,7 @@ $( document ).ready(function() {
     $repeatsSelect.change(
         function() {
             var value = this.value;
-            if (value === 'daily'){
-                $time.removeClass('hidden');
-            }
-            if (value === 'weekly'){
-                $days.removeClass('hidden');
-                $time.removeClass('hidden');
-            }
-            if (value === 'monthly'){
-                $monthly.removeClass('hidden');
-                $time.removeClass('hidden');
-            }
+            $days.removeClass('hidden');
         }
     );
 
