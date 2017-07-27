@@ -18,7 +18,7 @@ class QueryFactory(factory.django.DjangoModelFactory):
     """Factory for creating queries."""
 
     class Meta:
-        """Assign to Photo model."""
+        """Assign to Queries model."""
 
         model = Queries
 
@@ -27,6 +27,19 @@ class QueryFactory(factory.django.DjangoModelFactory):
     schedule = fake.text(100)
     last_run = datetime.datetime.now()
     # run_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='queries')
+
+
+class QueryInstanceFactory(factory.django.DjangoModelFactory):
+    """Factory for creating query instances."""
+
+    class Meta:
+        """Assign to Queries model."""
+
+        model = QueryInstance
+
+    root_url = fake.text(30)
+    visual_url = fake.text(30)
+    status = fake.text(2)
 
 
 class Views(TestCase):
@@ -86,4 +99,9 @@ class Models(TestCase):
     def test_queries_count(self):
         """Check the correct number of queries in database."""
         queries = Queries.objects.count()
+        self.assertEqual(queries, 10)
+
+    def test_queries_attached_to_user(self):
+        """Test queries attached to correct user."""
+        queries = self.user.queries.count()
         self.assertEqual(queries, 10)
