@@ -21,8 +21,6 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         """Form post method."""
         user = request.user
 
-        import pdb; pdb.set_trace()
-
         form_info = request.body.decode('utf-8')
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
@@ -36,7 +34,7 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         hour = start_on[11:13]
         minute = start_on[16:18]
 
-        cron_cmd = './manage.py runscript run_big_query --script-args "{}" "{}"'.format(new_query.dataset, new_query.query_text)
+        cron_cmd = './manage.py runscript run_big_query --script-args "{}" "{}" "{}"'.format(new_query.project, new_query.query_text, user.username)
 
         the_cron = CronTab()
         new_job = the_cron.new(command=cron_cmd)

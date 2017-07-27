@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'guery_manager',
     'queries',
     'django_extensions',
-    'python-crontab',
+    'crontab',
     'apiclient',
     'oauth2client'
 ]
