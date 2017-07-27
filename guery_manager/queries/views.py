@@ -40,11 +40,39 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         new_job = the_cron.new(command=cron_cmd)
 
         if frequency == 'repeat':
-            pass
+            days = []
+            if 'sunday' in form_info:
+                days.append('Sunday')
+            if 'monday' in form_info:
+                days.append('Monday')
+            if 'tuesday' in form_info:
+                days.append('Tuesday')
+            if 'wednesday' in form_info:
+                days.append('Wednesday')
+            if 'thursday' in form_info:
+                days.append('Thursday')
+            if 'friday' in form_info:
+                days.append('Friday')
+            if 'saturday' in form_info:
+                days.append('Saturday')
+
+            if len(days) == 7:
+                day_str = 'day'
+            elif len(days) == 7:
+                day_str = days[0] + ' and ' + days[1]
+            else:
+                day_str = ', '.join(days[:-1]) + ', and ' + days[-1]
+            new_job.minute.on(int(minute))
+            new_job.hour.on(int(hour))
+            new_query.schedule = 'Runs at {}:{} every {}'.format(hour, minute, day_str)
         elif frequency == 'run-once':
+            new_job.minute.on(int(minute))
+            new_job.hour.on(int(hour))
+            new_job.day.on(int(day))
+            new_job.month.on(int(month))
             new_query.schedule = 'Run at {}:{} on {}/{}/{}'.format(hour, minute, month, day, year)
 
-        the_cron.write()
+        the_cron.write(user='whatevertheuserismayberoot?')
         new_query.save()
         return redirect("/")
 
