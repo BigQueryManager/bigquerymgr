@@ -1,4 +1,3 @@
-import argparse
 import time
 import uuid
 import httplib2
@@ -8,6 +7,10 @@ from google.cloud import bigquery
 from django.contrib.auth.models import User
 import os
 import json
+from social_django.utils import load_strategy
+#...
+# social = request.user.social_auth.get(provider='google-oauth2')
+# access_token = social.get_access_token(load_strategy())
 
 
 the_user = User.objects.first()
@@ -43,10 +46,12 @@ credential_inputs = json.dumps(build_credentials)
 def run(*args):
     """Execute command."""
     # project, query, user name
+    import pdb; pdb.set_trace()
     project = *args[0]
     query = *args[1]
     user = User.objects.get(username=*args[2])
-    import pdb; pdb.set_trace()
+    social = user.social_auth.get(provider='google-oauth2')
+    access_token = social.get_access_token(load_strategy())
     credentials = client.OAuth2Credentials.from_json(credential_inputs)
     http_auth = credentials.authorize(httplib2.Http())
     bigq = discovery.build('bigquery', 'v2', http=http_auth)
