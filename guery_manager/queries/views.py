@@ -8,6 +8,7 @@ from django.views.generic.edit import UpdateView
 from django.shortcuts import redirect
 from crontab import CronTab
 import os
+import urllib
 
 
 class CreateNewQuery(LoginRequiredMixin, CreateView):
@@ -21,19 +22,23 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
     def post(self, request):
         """Form post method."""
         user = request.user
-        form_info = request.body.decode('utf-8')
+        form_info = urllib.parse.unquote(request.body.decode('utf-8')).replace('+', ' ')
+
+        import pdb;pdb.set_trace()
+
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
         new_query.project = form_info.split('project=')[1].split('&')[0]
         new_query.query_text = form_info.split('query=')[1].split('&')[0]
         new_query.run_by = request.user
+        new_query.last_run = 'Pending'
         frequency = form_info.split('schedule=')[1].split('&')[0]
         start_on = form_info.split('start-on=')[1].split('&')[0]
         year = start_on[:4]
         month = start_on[5:7]
         day = start_on[8:10]
         hour = start_on[11:13]
-        minute = start_on[16:18]
+        minute = start_on[14:16]
 
         cron_cmd = './manage.py runscript run_big_query --script-args "{}" "{}" "{}"'.format(new_query.project, new_query.query_text, user.username)
 
