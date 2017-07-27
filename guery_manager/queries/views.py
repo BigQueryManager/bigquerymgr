@@ -7,6 +7,7 @@ from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
 from django.shortcuts import redirect
 from crontab import CronTab
+import os
 
 
 class CreateNewQuery(LoginRequiredMixin, CreateView):
@@ -41,20 +42,28 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
 
         if frequency == 'repeat':
             days = []
+            short_days = []
             if 'sunday' in form_info:
                 days.append('Sunday')
+                short_days.append('SUN')
             if 'monday' in form_info:
                 days.append('Monday')
+                short_days.append('MON')
             if 'tuesday' in form_info:
                 days.append('Tuesday')
+                short_days.append('TUE')
             if 'wednesday' in form_info:
                 days.append('Wednesday')
+                short_days.append('WED')
             if 'thursday' in form_info:
                 days.append('Thursday')
+                short_days.append('THU')
             if 'friday' in form_info:
                 days.append('Friday')
+                short_days.append('FRI')
             if 'saturday' in form_info:
                 days.append('Saturday')
+                short_days.append('SAT')
 
             if len(days) == 7:
                 day_str = 'day'
@@ -64,6 +73,7 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
                 day_str = ', '.join(days[:-1]) + ', and ' + days[-1]
             new_job.minute.on(int(minute))
             new_job.hour.on(int(hour))
+            new_job.dow.on(*short_days)
             new_query.schedule = 'Runs at {}:{} every {}'.format(hour, minute, day_str)
         elif frequency == 'run-once':
             new_job.minute.on(int(minute))
@@ -72,7 +82,7 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
             new_job.month.on(int(month))
             new_query.schedule = 'Run at {}:{} on {}/{}/{}'.format(hour, minute, month, day, year)
 
-        the_cron.write(user='whatevertheuserismayberoot?')
+        the_cron.write(user=os.getlogin())
         new_query.save()
         return redirect("/")
 
