@@ -26,7 +26,7 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         form_info = request.body.decode('utf-8')
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
-        new_query.dataset = form_info.split('dataset=')[1].split('&')[0]
+        new_query.project = form_info.split('project=')[1].split('&')[0]
         new_query.query_text = form_info.split('query=')[1].split('&')[0]
         frequency = form_info.split('schedule=')[1].split('&')[0]
         start_on = form_info.split('start-on=')[1].split('&')[0]
