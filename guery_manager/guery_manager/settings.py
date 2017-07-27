@@ -65,9 +65,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_by_email',
 )
 
-EXTRA_DATA = [
-    ('refresh_token', 'refresh_token', True),
-]
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
+    'access_type': 'offline',
+    'approval_prompt': 'force'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
