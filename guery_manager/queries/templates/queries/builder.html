@@ -14,21 +14,21 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="name">Query name:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="name" placeholder="Query name" name="name">
+            <input type="textarea" class="form-control" id="name" placeholder="ex. My Favorite Query" name="name">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-2" for="dataset">Enter your dataset:</label>
+          <label class="control-label col-sm-2" for="project">Enter your Project ID:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="dataset" placeholder="Dataset you have permissions to" name="dataset">
+            <input type="textarea" class="form-control" id="project" placeholder="ex. sunny-tango-126789" name="project">
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-sm-2" for="query">Enter your query:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="query" placeholder="Enter a query" name="query">
+            <input type="textarea" class="form-control" id="query" placeholder="ex. SELECT COUNT(*) FROM publicdata:samples.shakespeare;" name="query">
           </div>
         </div>
 
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Starts On Date -->
-        <div class="form-group hidden starts-on dependent-once dependent-repeat">
+        <div class="form-group hidden starts-on dependent-once">
           <label class="control-label col-sm-2" for="datetimepicker4">Starts On:  </label>
           <div class="row">
               <div class='col-sm-3'>
@@ -56,9 +56,18 @@
           </div>
         </div>
 
+        <div class="form-group hidden start-time dependent-repeat">
+          <label class="control-label col-sm-2" for="datetimepicker3">Run at:  </label>
+          <div class="row">
+              <div class='col-sm-3'>
+                  <input type='text' class="form-control" id='datetimepicker3' placeholder="hh:mm"  name="start-on"/>
+              </div>
+          </div>
+        </div>
+
         <!-- Date Checkboxes -->
         <div class="form-group hidden days dependent-repeat">
-            <label class="control-label col-sm-2" for="">Repeats on: </label>
+            <label class="control-label col-sm-2" for="">Repeats every: </label>
             <div class="row">
               <div class="col-sm-6">
                 <label class="checkbox-inline">
