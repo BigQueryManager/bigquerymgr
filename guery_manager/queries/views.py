@@ -23,7 +23,6 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         """Form post method."""
         user = request.user
         form_info = urllib.parse.unquote(request.body.decode('utf-8')).replace('+', ' ')
-
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
         new_query.project = form_info.split('project=')[1].split('&')[0]

@@ -1,9 +1,8 @@
-import time
-import uuid
+"""Take args from cron job to build BigQuery API call and mutate objects."""
+
 import httplib2
 from apiclient import discovery
 from oauth2client import client
-from google.cloud import bigquery
 from django.contrib.auth.models import User
 from queries.models import Queries, QueryInstance
 import os
@@ -45,7 +44,7 @@ def build_credentials(the_user):
 
 
 def build_instance(project, query_text):
-    """Builds a query instance."""
+    """Build a query instance."""
     query = Queries.objects.filter(query_text=query_text).filter(project=project)
     query_instance = QueryInstance()
     query_instance.queries = query.first()
@@ -63,8 +62,8 @@ def run(*args):
 
         user = User.objects.get(username=user)
         social = user.social_auth.get(provider='google-oauth2')
+        social.refresh_token(load_strategy())
 
-        access_token = social.refresh_token(load_strategy())
         credential_inputs = build_credentials(user)
         credentials = client.OAuth2Credentials.from_json(credential_inputs)
         http_auth = credentials.authorize(httplib2.Http())
@@ -81,13 +80,17 @@ def run(*args):
                 }
             }
         ).execute()
-        query = Queries.objects.filter(project=project).filter(query_text=query_text)
-        # if 'error' in debug_me:
-        #     query_instance.status = debug_me['error']
-        #     query.last_run = debug_me['error']['message']
-        # else:
-        #     query_instance.status = debug_me['statistics']['endTime']
-        #     query.last_run = debug_me['statistics']['endTime']
+        query = Queries.objects.filter(project=project).filter(query_text=query_text).first()
+        if 'errorResult' in debug_me['status']:
+            query_instance.status = debug_me['status']['errorResult']['reason']
+        else:
+            query_instance.status = debug_me['statistics']['endTime']
+        query_instance.root_url = debug_me['id']
+        query.last_run = datetime.datetime.fromtimestamp(
+            int(debug_me['statistics']['endTime']) / 1000
+        ).strftime('%m-%d-%Y %H:%M')
+        query_instance.save()
+        query.save()
         return debug_me
     except IndexError:
         print("Not enough args to run BigQuery script.")
