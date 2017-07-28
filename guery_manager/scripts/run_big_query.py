@@ -80,14 +80,17 @@ def run(*args):
                 }
             }
         ).execute()
+        # import pdb; pdb.set_trace()
         query = Queries.objects.filter(project=project).filter(query_text=query_text).first()
         if 'errorResult' in debug_me['status']:
             query_instance.status = debug_me['status']['errorResult']['reason']
         else:
-            query_instance.status = debug_me['statistics']['endTime']
+            query_instance.status = datetime.datetime.fromtimestamp(
+                int(debug_me['statistics']['startTime']) / 1000
+            ).strftime('%m-%d-%Y %H:%M')
         query_instance.root_url = debug_me['id']
         query.last_run = datetime.datetime.fromtimestamp(
-            int(debug_me['statistics']['endTime']) / 1000
+            int(debug_me['statistics']['startTime']) / 1000
         ).strftime('%m-%d-%Y %H:%M')
         query_instance.save()
         query.save()
