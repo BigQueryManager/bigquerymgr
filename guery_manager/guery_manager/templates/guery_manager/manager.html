@@ -17,7 +17,7 @@
             {% for query in queries %}
                 <tr data-toggle="collapse" data-target="#query{{ query.id }}-queries" class="clickable">
                     <td>{{ query.name }}</td>
-                    <td>{{ query.schedule }} <a href='{% url "edit" pk=query.id %}'></a></td>
+                    <td><a href='{% url "queries:update" query.id %}'>{{ query.schedule }}</a></td>
                     <td>{{ query.last_run }}</td>
                 </tr>
                 {% if query.instances.all %}

@@ -12,23 +12,23 @@
       {% csrf_token %}
         <h3>Query</h3>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="name">Query name:</label>
+          <label class="control-label col-sm-2" for="name">Query Name:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="name" placeholder="ex. My Favorite Query" name="name">
+            <p>{{ query.name }}</p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-2" for="project">Enter your Project ID:</label>
+          <label class="control-label col-sm-2" for="project">Project ID:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="project" placeholder="ex. sunny-tango-126789" name="project" disabled>
+            <p>{{ query.project }}</p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-2" for="query">Enter your query:</label>
+          <label class="control-label col-sm-2" for="query">Query:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="query" placeholder="ex. SELECT COUNT(*) FROM publicdata:samples.shakespeare;" name="query" disabled>
+            <p>{{ query.query_text }}</p>
           </div>
         </div>
 
@@ -44,7 +44,7 @@
               <input type="radio" name="schedule" id="inlineRadio2" value="run-once">Run once
             </label>
             <label class="radio-inline">
-              <input type="radio" name="schedule" id="inlineRadio2" value="cancel">Cancel future queries
+              <input type="radio" name="schedule" id="inlineRadio3" value="cancel">Cancel future queries
             </label>
           </div>
         </div>
