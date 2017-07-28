@@ -45,11 +45,11 @@
                                     </td>
                                     <td>"{{ query_instance.status }}"</td>
                                 </tr>
+                                {% endfor %}
                             </table>
                         </div>
                     </td>
                 </tr>
-                {% endfor %}
                 {% endif %}
             {% endfor %}
             </tbody>
@@ -57,7 +57,13 @@
     </section>
 
 {% else %}
-<p><a id="login" href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+    <div class="container gimme-space">
+        <div class="row">
+            <div class="col-md-2 col-xs-2 col1 center-block center-this"> 
+                <a id="login" href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-primary center-this"><strong>Login with Google</strong></button></a>
+            </div>
+        </div>
+    </div>
 {% endif %}
 
     <!-- jQuery library -->
