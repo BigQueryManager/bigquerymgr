@@ -23,10 +23,10 @@ class QueryFactory(factory.django.DjangoModelFactory):
         model = Queries
 
     name = fake.text(30)
+    project = fake.text(30)
     query_text = fake.text(200)
     schedule = fake.text(100)
-    last_run = datetime.datetime.now()
-    # run_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='queries')
+    last_run = fake.text(99)
 
 
 class QueryInstanceFactory(factory.django.DjangoModelFactory):
@@ -39,7 +39,7 @@ class QueryInstanceFactory(factory.django.DjangoModelFactory):
 
     root_url = fake.text(30)
     visual_url = fake.text(30)
-    status = fake.text(2)
+    status = fake.text(10)
 
 
 class Views(TestCase):
@@ -77,6 +77,9 @@ class Views(TestCase):
         table = html.find('table')
         self.assertTrue(table)
 
+    def test_successful_post_to_build_form(self):
+        """This should update the databse."""
+        self.client.force_login(self.user)
 
 class Models(TestCase):
     """Test Queries and QueryInstance models."""
@@ -91,10 +94,20 @@ class Models(TestCase):
         self.user = user
         self.client = Client()
 
-        queries = (QueryFactory.build() for i in range(10))
+        queries = list((QueryFactory.build() for i in range(10)))
+        # import pdb; pdb.set_trace()
         for query in queries:
             query.run_by = self.user
             query.save()
+
+        self.queries = queries
+        self.query0 = queries[0]
+        query_instances = list((QueryInstanceFactory.build() for i in range(10)))
+        for query_instance in query_instances:
+            query_instance.queries = self.query0
+            query_instance.save()
+
+        self.query_instances = query_instances
 
     def test_queries_count(self):
         """Check the correct number of queries in database."""
@@ -105,3 +118,17 @@ class Models(TestCase):
         """Test queries attached to correct user."""
         queries = self.user.queries.count()
         self.assertEqual(queries, 10)
+
+    def test_query_instances_attached_to_query(self):
+        """Test query instances attached to query."""
+        self.assertEqual(self.query0.instances.count(), len(self.query_instances))
+
+    def test_delete_query(self):
+        """Tests query is successfully deleted from query list."""
+        Queries.objects.first().delete()
+        self.assertEqual(Queries.objects.count(), len(self.queries) - 1)
+
+    def test_delete_query_instance(self):
+        """Tests query is successfully deleted from query list."""
+        Queries.objects.first().delete()
+        self.assertEqual(QueryInstance.objects.count(), 0)
