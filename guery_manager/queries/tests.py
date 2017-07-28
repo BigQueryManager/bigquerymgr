@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import faker
 import datetime
 import factory
+from crontab import CronTab, CronItem
 
 fake = faker.Faker()
 
@@ -38,7 +39,7 @@ class QueryInstanceFactory(factory.django.DjangoModelFactory):
 
     root_url = fake.text(30)
     visual_url = fake.text(30)
-    status = fake.text(2)
+    status = fake.text(10)
 
 
 class Views(TestCase):
@@ -104,3 +105,50 @@ class Models(TestCase):
         """Test queries attached to correct user."""
         queries = self.user.queries.count()
         self.assertEqual(queries, 10)
+
+
+class TestAddQueries(TestCase):
+    """Test to verify a query is added to the DB and cron."""
+
+    def setUp(self):
+        """Create a user and query model info."""
+        user = User(
+            username='bill',
+            email='bill@bob.com'
+        )
+        user.save()
+        self.user = user
+        self.client = Client()
+        self.name = 'Name this thing'
+        self.project = 'monty-python-123456'
+        self.query_text = 'SELECT * FROM public:dumb-data'
+        self.run_by = user
+        self.last_run = 'Pending'
+
+    def test_user_must_be_logged_in_to_add_query(self):
+        """User must be logged in to add queries."""
+        response = self.client.get(reverse_lazy('queries:build'))
+        self.assertRedirects(response, '/?next=/query/build/')
+
+    def test_get_on_add_query_page(self):
+        """Test that we get 200 response code for adding queries."""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse_lazy('queries:build'))
+        self.assertEqual(response.status_code, 200)
+
+    # def test_user_redirects_after_successful_post(self):
+    #     """Test that a successful post redirects to the manager."""
+    #     self.client.force_login(self.user)
+    #     response = self.client.post(reverse_lazy('queries:build'),
+    #                                 {'name': self.name, 'project': self.project, 'query': self.query_text, 'schedule': 'run-once', 'start-on': '2017-07-12 13:50'})
+    #     self.assertRedirects(response, '/?next=/query/build/')
+
+    # def test_user_post_creates_cron_item(self):
+    #     """The post should create a new cron job."""
+    #     self.client.force_login(self.user)
+    #     self.client.post(reverse_lazy('queries:build'), {'name': self.name, 'project': self.project, 'query': self.query_text, 'schedule': 'run-once', 'start-on': '2017-05-13 04:15'})
+    #     the_cron = CronTab(user=True)
+    #     search_cmd = '"{}" "{}" "{}"'.format(self.project, self.query_text, self.user.username)
+    #     gen_job = the_cron.find_command(search_cmd)
+    #     the_job = next(gen_job)
+    #     self.assertTrue(isinstance(the_job, CronItem))
