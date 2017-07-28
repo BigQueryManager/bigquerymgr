@@ -23,9 +23,6 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         """Form post method."""
         user = request.user
         form_info = urllib.parse.unquote(request.body.decode('utf-8')).replace('+', ' ')
-
-        # import pdb;pdb.set_trace()
-
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
         new_query.project = form_info.split('project=')[1].split('&')[0]
@@ -42,7 +39,7 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
 
         cron_cmd = './manage.py runscript run_big_query --script-args "{}" "{}" "{}"'.format(new_query.project, new_query.query_text, user.username)
 
-        the_cron = CronTab()
+        the_cron = CronTab(user=True)
         new_job = the_cron.new(command=cron_cmd)
 
         if frequency == 'repeat':
@@ -72,8 +69,10 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
 
             if len(days) == 7:
                 day_str = 'day'
-            elif len(days) == 7:
+            elif len(days) == 2:
                 day_str = days[0] + ' and ' + days[1]
+            elif len(days) == 1:
+                day_str = days[0]
             else:
                 day_str = ', '.join(days[:-1]) + ', and ' + days[-1]
             new_job.minute.on(int(minute))
