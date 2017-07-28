@@ -24,7 +24,7 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         user = request.user
         form_info = urllib.parse.unquote(request.body.decode('utf-8')).replace('+', ' ')
 
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
 
         new_query = Queries()
         new_query.name = form_info.split('name=')[1].split('&')[0]
