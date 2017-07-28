@@ -1,0 +1,53 @@
+{% extends 'guery_manager/base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+<section class="container-fluid main" id="about">
+    <h1>BigQueryManager</h1>
+    <p>This app will allow you to make queries to BigQuery. You will be able to store your data that you've quieried and you will be able to make a visual representation out of that data.</p>
+
+    <h3>Using the application</h3>
+    <h4>Requirements</h4>
+    <ul>
+        <li>a Google account</li>
+        <li>a BigQuery account tied to your Google account</li>
+        <li>a BigQuery project tied to your BigQuery account; you must have access to this project</li>
+    </ul>
+
+    <h3>Sign in</h3>
+    <p>Authenticate using your Google account</p>
+
+    <h4>Create a query</h4>
+    <ul>
+        <li>Navigate to the Create a Query link in the nav bar.</li>
+        <li>Enter the input fields in the form; you'll need your BigQuery project id and a valid BigQuery query.</li>
+        <li>Schedule your query to run on a schedule or once at a given time.</li>
+    </ul>
+
+
+    <h4>See your query</h4>
+    <p>All scheduled queries are visible in the Query Manager, accessible from the home route or clicking on the BigQueryManager link in the nav bar.</p>
+
+    <p>Clicking on a query will reveal any query instances, which represent every time a scheduled query ran. The query instance will contain links to the query results in BigQuery.</p>
+
+    <h4>Update your query</h4>
+    <p>If you'd like to change how often your query runs or stop it from running in the future, you can click on the schedule link on the query. You'll be directed to a form which will allow you to make those changes.</p>
+
+    <h4>Logging out</h4>
+    <div class="alert alert-warning" role="alert">
+      <strong>Alert!</strong> If you log out, your scheduled queries will be canceled.
+    </div>
+
+    <h3>Code</h3>
+    <p><a href="https://github.com/BigQueryManager/bigquerymgr" target="_blank">BigQueryManager on Github</a></p>
+
+    <h3>Authors</h3>
+    <ul>
+        <li><a href="https://github.com/jjfeore" target="_blank">James Feore</a></li>
+        <li><a href="https://github.com/ADL175" target="_blank">David Lim</a></li>
+        <li><a href="https://github.com/morganelle" target="_blank">Morgan Nomura</a></li>
+        <li><a href="https://github.com/Woojgh" target="_blank">James Salamonsen</a></li>
+    </ul>
+</section>
+
+{% endblock %}
