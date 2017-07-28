@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from guery_manager.views import HomeView
+from guery_manager.views import HomeView, DocsView
 from django.conf import settings
 from django.conf.urls.static import static
 admin.autodiscover()
@@ -26,6 +26,7 @@ urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^query/', include('queries.urls')),
+    url(r'^docs/$', DocsView.as_view(), name='docs'),
 ]
 
 if settings.DEBUG:

@@ -77,6 +77,9 @@ class Views(TestCase):
         table = html.find('table')
         self.assertTrue(table)
 
+    def test_successful_post_to_build_form(self):
+        """This should update the databse."""
+        self.client.force_login(self.user)
 
 class Models(TestCase):
     """Test Queries and QueryInstance models."""
@@ -91,16 +94,17 @@ class Models(TestCase):
         self.user = user
         self.client = Client()
 
-        queries = (QueryFactory.build() for i in range(10))
+        queries = list((QueryFactory.build() for i in range(10)))
+        # import pdb; pdb.set_trace()
         for query in queries:
             query.run_by = self.user
             query.save()
 
         self.queries = queries
-
-        query_instances = (QueryInstanceFactory.build() for i in range(10))
+        self.query0 = queries[0]
+        query_instances = list((QueryInstanceFactory.build() for i in range(10)))
         for query_instance in query_instances:
-            query_instance.queries = Queries.objects.first()
+            query_instance.queries = self.query0
             query_instance.save()
 
         self.query_instances = query_instances
@@ -117,5 +121,14 @@ class Models(TestCase):
 
     def test_query_instances_attached_to_query(self):
         """Test query instances attached to query."""
-        query = self.queries[0]
-        self.assertEqual(query.instances.count(), self.queries.count())
+        self.assertEqual(self.query0.instances.count(), len(self.query_instances))
+
+    def test_delete_query(self):
+        """Tests query is successfully deleted from query list."""
+        Queries.objects.first().delete()
+        self.assertEqual(Queries.objects.count(), len(self.queries) - 1)
+
+    def test_delete_query_instance(self):
+        """Tests query is successfully deleted from query list."""
+        Queries.objects.first().delete()
+        self.assertEqual(QueryInstance.objects.count(), 0)
