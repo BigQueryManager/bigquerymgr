@@ -38,7 +38,9 @@ class CreateNewQuery(LoginRequiredMixin, CreateView):
         hour = start_on[11:13]
         minute = start_on[14:16]
 
-        cron_cmd = './manage.py runscript run_big_query --script-args "{}" "{}" "{}"'.format(new_query.project, new_query.query_text, user.username)
+        the_path = os.path.abspath(__file__).replace('views.py', '')
+
+        cron_cmd = '. {}../../ENV/bin/activate && {}../../ENV/bin/python3 {}../manage.py runscript run_big_query --script-args "{}" "{}" "{}"'.format(the_path, the_path, the_path, new_query.project, new_query.query_text, user.username)
 
         the_cron = CronTab(user=True)
         new_job = the_cron.new(command=cron_cmd)

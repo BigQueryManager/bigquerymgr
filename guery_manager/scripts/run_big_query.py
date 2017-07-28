@@ -46,7 +46,6 @@ def build_credentials(the_user):
 
 def build_instance(project, query_text):
     """Builds a query instance."""
-    import pdb; pdb.set_trace()
     query = Queries.objects.filter(query_text=query_text).filter(project=project)
     query_instance = QueryInstance()
     query_instance.queries = query.first()
@@ -60,7 +59,6 @@ def run(*args):
         project = args[0]
         query_text = args[1]
         query_instance = build_instance(project, query_text)
-        import pdb; pdb.set_trace()
         user = args[2]
 
         user = User.objects.get(username=user)
