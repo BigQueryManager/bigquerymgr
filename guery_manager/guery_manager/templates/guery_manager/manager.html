@@ -1,0 +1,75 @@
+{% extends 'guery_manager/base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+{% if user.is_authenticated %}
+
+    <section class="container-fluid main">
+        <h1>Your queries</h1>
+        <table class="table table-hover">
+            <thead>
+                <th>Query&nbsp;<a href="#" data-toggle="tooltip" title="QUERYGOESHERE"> <i class="fa fa-info-circle" aria-hidden="true"></i></a></th>
+                <th><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Schedule</th>
+                <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Last run</th>
+            </thead>
+            
+            <tbody>
+            {% for query in queries %}
+                <tr data-toggle="collapse" data-target="#query{{ query.id }}-queries" class="clickable">
+                    <td>{{ query.name }}</td>
+                    <td><a href='{% url "queries:update" query.id %}'>{{ query.schedule }}</a></td>
+                    <td>{{ query.last_run }}</td>
+                </tr>
+                {% if query.instances.all %}
+                <tr>
+                    <td colspan="3" class="query-instances">
+                        <div id="query{{ query.id }}-queries" class="collapse">
+                            <table class="table">
+                                <thead>
+                                    <th>Download</th>
+                                    <th>Visualization</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </thead>
+                                {% for query_instance in query.instances.all %}
+                                <tr>
+                                    <td>
+                                        <a href="https://bigquery.cloud.google.com/results/{{ query_instance.root_url }}" target="_blank">CSV</a>
+                                        <a href="https://bigquery.cloud.google.com/results/{{ query_instance.root_url }}" target="_blank">JSON</a>
+                                    </td>
+                                    <td>
+                                        <a href="https://bigquery.cloud.google.com/results/{{ query_instance.visual_url }}" target="_blank">Visualization</a>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </td>
+                                    <td>"{{ query_instance.status }}"</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% else %}
+    <div class="container gimme-space">
+        <div class="row">
+            <div class="col-md-2 col-xs-2 col1 center-block center-this"> 
+                <a id="login" href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-primary center-this"><strong>Login with Google</strong></button></a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static '/scripts/bqMgr.js' %}"></script>
+
+{% endblock %}

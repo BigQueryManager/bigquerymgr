@@ -1,0 +1,28 @@
+section.main {
+    max-width: 80%;
+    margin-top: 80px;
+}
+.table>tbody>tr>td.query-instances {
+    padding: 0;
+}
+
+.gimme-space {
+  margin-top: 100px;
+}
+
+.center-this {
+  text-align: center;
+  margin: auto;
+} 
+
+.center-block {
+  float:none;
+}
+
+section#about {
+    max-width: 70%;
+}
+
+section.main h1 {
+    margin-bottom: 20px;
+}

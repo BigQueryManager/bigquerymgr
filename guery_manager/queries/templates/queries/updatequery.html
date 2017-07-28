@@ -1,0 +1,109 @@
+{% extends 'guery_manager/base.html' %}
+
+{% load staticfiles %}
+
+{% block main %}
+  <section class="container-fluid main">
+    <h1>Create a query</h1>
+
+    <!-- SCHEDULE FORM -->
+      <!-- Query -->
+      <form class="query-form" method="POST">
+      {% csrf_token %}
+        <h3>Query</h3>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Query Name:</label>
+          <div class="col-sm-10">
+            <p>{{ query.name }}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="project">Project ID:</label>
+          <div class="col-sm-10">
+            <p>{{ query.project }}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="query">Query:</label>
+          <div class="col-sm-10">
+            <p>{{ query.query_text }}</p>
+          </div>
+        </div>
+
+        <!-- Scheduler -->
+        <h3>Schedule</h3>
+        <div class="form-group schedule">
+          <label class="control-label col-sm-2" for="schedule">Frequency:</label>
+          <div class="radio">          
+            <label class="radio-inline">
+              <input type="radio" name="schedule" id="inlineRadio1" value="repeat">Repeat
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="schedule" id="inlineRadio2" value="run-once">Run once
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="schedule" id="inlineRadio3" value="cancel">Cancel future queries
+            </label>
+          </div>
+        </div>
+
+        <!-- Starts On Date -->
+        <div class="form-group hidden starts-on dependent-once dependent-repeat">
+          <label class="control-label col-sm-2" for="datetimepicker4">Starts On:  </label>
+          <div class="row">
+              <div class='col-sm-3'>
+                  <input type='text' class="form-control" id='datetimepicker4' placeholder="mm/dd/yy"  name="start-on"/>
+              </div>
+          </div>
+        </div>
+
+        <!-- Date Checkboxes -->
+        <div class="form-group hidden days dependent-repeat">
+            <label class="control-label col-sm-2" for="">Repeat on: </label>
+            <div class="row">
+              <div class="col-sm-6">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="sunday">Su
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="true" name="monday">M
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="true" name="tuesday">T
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="wednesday">W
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="true" name="thursday">Th
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="true" name="friday">F
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="true" name="saturday">S
+                </label>
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">        
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+
+  </section>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static '/scripts/vendor/bootstrap-datetimepicker.js' %}"></script>
+    <!-- Moment.js library -->
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static '/scripts/bqForm.js' %}"></script>
+{% endblock %}
