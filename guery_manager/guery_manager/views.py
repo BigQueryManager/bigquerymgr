@@ -1,6 +1,6 @@
 """Query manager views."""
 
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from queries.models import Queries
 
 
@@ -18,3 +18,9 @@ class HomeView(ListView):
         else:
             context['queries'] = self.request.user.queries.all()
             return context
+
+
+class DocsView(TemplateView):
+    """Docs view callable."""
+
+    template_name = 'guery_manager/docs.html'

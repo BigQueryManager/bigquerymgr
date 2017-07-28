@@ -1,5 +1,6 @@
 section.main {
     max-width: 80%;
+    margin-top: 80px;
 }
 .table>tbody>tr>td.query-instances {
     padding: 0;
@@ -16,4 +17,12 @@ section.main {
 
 .center-block {
   float:none;
+}
+
+section#about {
+    max-width: 70%;
+}
+
+section.main h1 {
+    margin-bottom: 20px;
 }
