@@ -46,9 +46,10 @@ def build_credentials(the_user):
 
 def build_instance(project, query_text):
     """Builds a query instance."""
-    query = Queries.objects.filter(project=project).filter(query=query_text)
+    import pdb; pdb.set_trace()
+    query = Queries.objects.filter(query_text=query_text).filter(project=project)
     query_instance = QueryInstance()
-    query_instance.queries = query
+    query_instance.queries = query.first()
     query_instance.save()
     return query_instance
 
@@ -82,7 +83,7 @@ def run(*args):
                 }
             }
         ).execute()
-        query = Queries.objects.filter(project=project).filter(query=query_text)
+        query = Queries.objects.filter(project=project).filter(query_text=query_text)
         # if 'error' in debug_me:
         #     query_instance.status = debug_me['error']
         #     query.last_run = debug_me['error']['message']
