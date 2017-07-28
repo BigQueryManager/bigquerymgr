@@ -44,12 +44,22 @@ def build_credentials(the_user):
     return json.dumps(credentials)
 
 
+def build_instance(project, query_text):
+    """Builds a query instance."""
+    query = Queries.objects.filter(project=project).filter(query=query_text)
+    query_instance = QueryInstance()
+    query_instance.queries = query
+    query_instance.save()
+    return query_instance
+
+
 def run(*args):
     """Execute command."""
-    print(args)
     try:
         project = args[0]
         query_text = args[1]
+        query_instance = build_instance(project, query_text)
+        import pdb; pdb.set_trace()
         user = args[2]
 
         user = User.objects.get(username=user)
@@ -72,7 +82,13 @@ def run(*args):
                 }
             }
         ).execute()
-
+        query = Queries.objects.filter(project=project).filter(query=query_text)
+        # if 'error' in debug_me:
+        #     query_instance.status = debug_me['error']
+        #     query.last_run = debug_me['error']['message']
+        # else:
+        #     query_instance.status = debug_me['statistics']['endTime']
+        #     query.last_run = debug_me['statistics']['endTime']
         return debug_me
     except IndexError:
         print("Not enough args to run BigQuery script.")
