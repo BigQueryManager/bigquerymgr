@@ -4,3 +4,16 @@ section.main {
 .table>tbody>tr>td.query-instances {
     padding: 0;
 }
+
+.gimme-space {
+  margin-top: 100px;
+}
+
+.center-this {
+  text-align: center;
+  margin: auto;
+} 
+
+.center-block {
+  float:none;
+}
