@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 import faker
 import datetime
 import factory
-# Create your tests here.
 
 fake = faker.Faker()
 
