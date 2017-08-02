@@ -91,10 +91,19 @@ class Models(TestCase):
         self.user = user
         self.client = Client()
 
-        queries = (QueryFactory.build() for i in range(10))
+        queries = list((QueryFactory.build() for i in range(10)))
         for query in queries:
             query.run_by = self.user
             query.save()
+
+        self.queries = queries
+        self.query0 = queries[0]
+        query_instances = list((QueryInstanceFactory.build() for i in range(10)))
+        for query_instance in query_instances:
+            query_instance.queries = self.query0
+            query_instance.save()
+
+        self.query_instances = query_instances
 
     def test_queries_count(self):
         """Check the correct number of queries in database."""
@@ -105,6 +114,20 @@ class Models(TestCase):
         """Test queries attached to correct user."""
         queries = self.user.queries.count()
         self.assertEqual(queries, 10)
+
+    def test_query_instances_attached_to_query(self):
+        """Test query instances attached to query."""
+        self.assertEqual(self.query0.instances.count(), len(self.query_instances))
+
+    def test_delete_query(self):
+        """Test query is successfully deleted from query list."""
+        Queries.objects.first().delete()
+        self.assertEqual(Queries.objects.count(), len(self.queries) - 1)
+
+    def test_delete_query_instance(self):
+        """Test query is successfully deleted from query list."""
+        Queries.objects.first().delete()
+        self.assertEqual(QueryInstance.objects.count(), 0)
 
 
 class TestAddQueries(TestCase):
@@ -135,20 +158,3 @@ class TestAddQueries(TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse_lazy('queries:build'))
         self.assertEqual(response.status_code, 200)
-
-    # def test_user_redirects_after_successful_post(self):
-    #     """Test that a successful post redirects to the manager."""
-    #     self.client.force_login(self.user)
-    #     response = self.client.post(reverse_lazy('queries:build'),
-    #                                 {'name': self.name, 'project': self.project, 'query': self.query_text, 'schedule': 'run-once', 'start-on': '2017-07-12 13:50'})
-    #     self.assertRedirects(response, '/?next=/query/build/')
-
-    # def test_user_post_creates_cron_item(self):
-    #     """The post should create a new cron job."""
-    #     self.client.force_login(self.user)
-    #     self.client.post(reverse_lazy('queries:build'), {'name': self.name, 'project': self.project, 'query': self.query_text, 'schedule': 'run-once', 'start-on': '2017-05-13 04:15'})
-    #     the_cron = CronTab(user=True)
-    #     search_cmd = '"{}" "{}" "{}"'.format(self.project, self.query_text, self.user.username)
-    #     gen_job = the_cron.find_command(search_cmd)
-    #     the_job = next(gen_job)
-    #     self.assertTrue(isinstance(the_job, CronItem))
