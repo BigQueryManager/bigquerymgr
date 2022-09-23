@@ -72,7 +72,7 @@ proto-google-cloud-spanner-admin-database-v1==0.15.3
 proto-google-cloud-spanner-admin-instance-v1==0.15.3
 proto-google-cloud-spanner-v1==0.15.3
 proto-google-cloud-speech-v1==0.15.3
-protobuf==3.3.0
+protobuf==3.18.3
 psycopg2==2.7.3
 ptyprocess==0.5.2
 py==1.4.34
